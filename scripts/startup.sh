@@ -1,14 +1,21 @@
 #!/bin/bash
+# Wait for Internet Connection
 sleep 30
-echo "Starting nodejs Server"
-git fetch
-git stash
-git pull
+echo "Start Git Update"
+git -C /home/arrenberg/quartiersdisplay-interface fetch
+git -C /home/arrenberg/quartiersdisplay-interface stash
+git -C /home/arrenberg/quartiersdisplay-interface pull
 echo "Git Update erledigt"
-npm install
-npm run dev
+echo "Update Next Server"
+npm --prefix /home/arrenberg/quartiersdisplay-interface/ install 
+npm --prefix /home/arrenberg/quartiersdisplay-interface/ run build
+npm --prefix /home/arrenberg/quartiersdisplay-interface/ run start &
 
 echo "Next environment running"
 
-echo "Start Window Server"
-startx -- -nocursor
+
+exit
+
+
+
+
