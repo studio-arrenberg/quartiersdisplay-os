@@ -1,20 +1,67 @@
 
-### Activate Cron Service on Raspberry
-    /etc/init.d/cron start
+## Setup Raspberry Pi for the digital street sign
+### 1. Go to Settings with `sudo raspi-config`
+   1. Activate VNC Server
+   2. Setup Autologin to console
+### 2. Create Install.sh and run it
+    sudo nano install.sh
 
-### Remove Command Line Logo on startup
+Add the following code to the newly created file
+
+    #!/bin/bash
+    #//Install git, openbox, xserver, chromium, vnc, npm, node js,
+    echo "Activate Cron Server"
+    sudo /etc/init.d/cron start
+
+    echo "Install dependencies"
+    sudo apt-get install -y chromium-browser
+    sudo apt-get install -y xserver-xorg
+    sudo apt-get install -y realvnc-vnc-server
+    sudo apt-get install -y xinit
+    sudo apt-get install -y openbox
+    sudo apt-get install -y unclutter
+    sudo apt-get install -y git
+    sudo apt-get install -y nodejs
+    sudo apt-get install -y npm
+    sudo apt-get install -y rfkill
+    sudo apt-get install -y htop
+
+    echo "Setup Git Repository"
+    git clone https://github.com/studio-arrenberg/quartiersdisplay-interface.git
+    git clone https://github.com/studio-arrenberg/quartiersdisplay-os.git
+
+    echo "Setup Pitunnel"
+    curl -s pitunnel.com/get/bP8fr3z2i | sudo bash
+
+    #echo "Setup Next environment"
+    #npm install
+    #npm run build
+    #npm run start
+
+    #Future
+    #echo "Modify files"
+
+    exit 
+
+Make the file executable
+    
+    sudo chmod +x install.sh
+
+Run the newly created file
+    
+    ./install.sh
+
+
+### 3. Remove command line logo and logs on startup
 Add the following in `cmdline.txt` file and change 
+    
+    sudo nano /boot/cmdline.txt
+
+And this line to the file and change console output to 3
 
     loglevel=3 quiet logo.nologo
 
-### Change Console Output to 3
-    sudo nano /boot/cmdline.txt
- 
-add `logo.nologo` at the end
-
-install rfkill  
-
-### Add line to the .profile in home folder to startup the window server
+### 4. Add line to the .profile in home folder to startup the window server
     sudo nano .profile
 
 File Content
@@ -23,29 +70,22 @@ File Content
     [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx -- -nocursor &
 
 
-### Manually Change the Graphic Memory to 3072 MB
+### 5. Manually Change the Graphic Memory to 3072 MB
     sudo raspi-config
 
-### Disable Wifi in config.txt
+### 6. Disable Wifi in config.txt
     dtoverlay=disable-wifi
-
-### Install Pitunnel and setup SSH and VNC Port
-    curl -s pitunnel.com/get/bP8fr3z2i | sudo bash
-
-### add Startup Script to rc.local file
-Change Startup settings
-
-    sudo nano /etc/rc.local
-
+### 7. Add Startup Script to rc.local file
+Change Startup settings with `sudo nano /etc/rc.local`
+    
 Add the following to the file:
 
     bash /home/arrenberg/quartiersdisplay-os/scripts/startup.sh &
     #Suppress Kernel Messages
     dmesg --console-off
 
-
-## Create .xinitrc File in Home Directory
-    sudo nano .xinbit
+### 8. Create .xinitrc File in Home Directory
+    sudo nano .xinitrc
 
 This is the file content
 
@@ -55,13 +95,16 @@ This is the file content
     xset s noblank
 
     unclutter &
-    chromium-browser http://localhost:3000 \
+    /usr/bin/chromium-browser http://localhost:3000 \
     --window-size=1920,1080 \
     --window-position=0,0 \
     --start-fullscreen \
     --kiosk \
     --incognito \
-    --fast-start
+    --fast-start \
+    --noerrdialogs \
+    --disable-infobars
+
 
 ## Create .env and setup endpoint
     NEXT_PUBLIC_UNIQUE_IDENTIFIER=

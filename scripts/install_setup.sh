@@ -14,6 +14,12 @@ sudo apt-get install -y git
 sudo apt-get install -y nodejs
 sudo apt-get install -y npm
 sudo apt-get install -y rfkill
+sudo apt-get install -y htop
+
+echo "Setup Git Repository"
+sudo apt-get update
+sudo apt-get upgrade
+
 
 echo "Setup Git Repository"
 git clone https://github.com/studio-arrenberg/quartiersdisplay-interface.git
