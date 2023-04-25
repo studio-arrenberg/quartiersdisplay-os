@@ -82,6 +82,27 @@ When issues occur update & upgrade Pi as well as Dependencies.
 When unable to login with credientials.
 Restart Terminal
 
+### Server does not start
+1. Navigate to Repository
+2. `cd quartiersdisplay-interface`
+3. Run `rm -rf node_modules`
+4. Run `npm install --legacy-peer-deps`
+5. Or Run `npm install --force`
+6. Run `sudo npm run dev`
+
+### VNC Viewer
+1. [Download](https://www.realvnc.com/en/connect/download/viewer/macos/) & Install VNC Viewer
+2. Get Credentials from PiTunnel
+3. E.g. `pitunnel.com:17141` ***without http://***
+
+### Change Screen on SSH
+1. Install screen `sudo apt-get install screen`
+2. List Screens with `ls /dev/pts/`
+3. Change Screen with `sudo screen -x 0`
+
+### Stop Nodejs
+1. Run `sudo killall node`
+2. RUN `sudo npm run dev`
 
 # Files
 
