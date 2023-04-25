@@ -6,15 +6,23 @@ Operating System for the Quartiersdisplays with all required software.
 - [iiyama PROLITE S2820HSB-B1 Display](https://iiyama.com/de_de/produkte/prolite-s2820hsb-b1/)
 
 ## Stack
+<details>
+<summary>Core</summary>
 
-**Core**
 - [DietPi](https://dietpi.com/)
+</details>
 
-**Dependencies** 
+<details>
+<summary>Dependencies</summary>
+
 - GIT
 - Chromium
 - VNC Server
 - NodeJS
+</details>
+
+## Setup Pi
+Go to [Setup](https://github.com/studio-arrenberg/quartiersdisplay-os/blob/main/setup.md)
 
 ## Setup
 1. Install DietPi `npm install`
@@ -24,19 +32,24 @@ Operating System for the Quartiersdisplays with all required software.
 - [PiTunnel](https://www.pitunnel.com/)
 - [Teltonika RMS](https://rms.teltonika-networks.com/)
 
-## Features
+## Future
+
+<details>
+<summary>Features</summary>
+
 - Nightmode
 - Reboot once a Day
+</details>
 
-## Todo
-- Install DietPi
-- Set Up GIT
-- Cron Jobs
-- Create Startup Script
-- Setup Auto Login
-- Enter Kiosk mode
-- Boot Sequence
+<details>
+<summary>Todo</summary>
 
+- Nightmode
+- Reboot once a Day
+</details>
 
-## Future
+<details>
+<summary>Future</summary>
+
 - Create Dashboard with overview
+</details>
